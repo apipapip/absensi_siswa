@@ -1,20 +1,29 @@
 <?php
 session_start();
-include "koneksi.php";
-
-// Ambil username dan password dari input form
 $username = $_POST['username'];
 $password = $_POST['password'];
+include "koneksi.php";
+$sql = mysqli_query($koneksi, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
+$jumlah_admin = mysqli_num_rows($sql);
+$data = mysqli_fetch_array($sql);
+if ($jumlah_admin > 0) {
+    $_SESSION['username'] = $data['username'];
+    $_SESSION['user_id'] = $data['user_id'];
+    $_SESSION['status_login'] = true;
+    $_SESSION['waktu'] = time();
 
-$query="SELECT * FROM admin WHERE username='$username'";
-$login=mysqli_query($koneksi,$query);
-$data=mysqli_fetch_array($login);
-if(password_verify($pass,$data['password'])){
-    $_SESSION['username']=$data['username'];
-    $_SESSION['id']=$data['id'];
-    $_SESSION['nama']=$data['nama'];
-    $_SESSION['login_status']=true;
-    header('location:index.php');
+    if ($data['sebagai'] == 'admin') {
+
+        $_SESSION['status_login1'] = true;
+   
+        header('Location:index.php');
+    } elseif ($data['sebagai'] == 'guru') {
+   
+        $_SESSION['status_login2'] = true;
+
+        header('Location:guru.php');
+    } 
+
 }else{
     header("location:login.php?pesan=Gagal");
 }

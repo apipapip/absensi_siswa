@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-
 if (isset($_GET['title'])) {
   $title = $_GET['title'];
 } else {
   $title = "Aplikasi Perpustakaan";
 }
 ?>
-
 
 
 <!DOCTYPE html>

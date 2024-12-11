@@ -10,7 +10,6 @@ if (isset($_GET['title'])) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,8 +73,7 @@ if (isset($_GET['title'])) {
         </div>
         <div class="info">
         <a href="#" class="d-block">
-          <?=$_SESSION['nama'] ??
-          'pengguna' ?>
+          guru
       </a>
         </div>
       </div>
